@@ -1,0 +1,28 @@
+# ── 비밀/개인정보 (절대 커밋 금지) ──────────────────────
+.env
+portfolio.json
+
+# 실제 보유종목이 들어 있어 함께 제외 (.env.example은 빈 템플릿이라 커밋 허용)
+portfolio.example.json
+
+# ── 런타임 산출물 ───────────────────────────────────────
+data/
+reports/
+*.log
+
+# ── 파이썬 ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ── 에디터/OS ───────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ── Claude Code 개인 설정 (머신별 권한목록, 커밋 불필요) ──
+.claude/settings.local.json

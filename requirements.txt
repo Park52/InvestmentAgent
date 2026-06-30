@@ -1,0 +1,16 @@
+anthropic>=0.40.0
+yfinance>=0.2.40
+pandas>=2.0.0
+# pandas-ta: disabled. Incompatible with numpy>=2.0 (uses removed `from numpy import NaN`)
+# and the pinned build is no longer on PyPI. Indicators are computed directly in
+# utils/indicators.py with pandas/numpy, so this package is not required.
+# pandas-ta>=0.3.14b
+chromadb>=0.5.0
+feedparser>=6.0.0
+requests>=2.31.0
+markdown>=3.4.0
+pytrends>=4.9.0
+apscheduler>=3.10.0
+python-dotenv>=1.0.0
+# Notifications: Telegram (send + /run polling) uses requests, Gmail uses stdlib smtplib.
+# python-telegram-bot is NOT required (we poll getUpdates via requests).
