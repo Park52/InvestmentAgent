@@ -193,4 +193,4 @@ python scheduler.py
 
 ## 라이선스
 
-[MIT License](LICENSE) © 2026 Park52
+[MIT License](LICENSE) © 2026 박재현 (Park Jaehyun)
