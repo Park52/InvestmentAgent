@@ -1,0 +1,16 @@
+{
+  "_comment": "이 파일을 portfolio.json 으로 복사한 뒤 실제 보유 종목으로 채우세요. (cp portfolio.sample.json portfolio.json)",
+  "_schema": {
+    "ticker": "미국 증시 티커 (예: AAPL)",
+    "name": "종목명 (자유 입력)",
+    "sector": "Technology | Semiconductors | Communication Services | Healthcare | Financials | Energy | Consumer Discretionary | Consumer Staples | Industrials | Materials | Utilities | Real Estate | Other",
+    "weight": "비중. 0~1(비율) 또는 0~100(퍼센트) 둘 다 허용 (자동 감지)"
+  },
+  "holdings": [
+    {"ticker": "AAPL", "name": "Apple",            "sector": "Technology",     "weight": 30},
+    {"ticker": "NVDA", "name": "NVIDIA",           "sector": "Semiconductors", "weight": 20},
+    {"ticker": "JPM",  "name": "JPMorgan Chase",   "sector": "Financials",     "weight": 20},
+    {"ticker": "JNJ",  "name": "Johnson & Johnson","sector": "Healthcare",     "weight": 15},
+    {"ticker": "XOM",  "name": "Exxon Mobil",      "sector": "Energy",         "weight": 15}
+  ]
+}
