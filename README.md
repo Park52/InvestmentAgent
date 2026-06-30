@@ -67,6 +67,78 @@ python scheduler.py
 
 ---
 
+## 실행 결과 예시
+
+아래는 실제 1회 실행(`python scheduler.py --now`) 결과다.
+관심 섹터 `Energy,Industrials` + `HOT_SECTOR_COUNT=1` + `MAX_CANDIDATES_PER_SECTOR=3` 설정.
+
+### 파이프라인 로그 (요약)
+
+```
+[Agent 0] MacroCheck      VIX=17.69 USDKRW=1551.0 US10Y=4.39 -> risk=LOW
+[Agent 2] DataCollector   기사 98건 -> 중복제거 -> 최근 78건 처리(감성 점수화)
+[Agent 3] SectorClassifier 뉴스 핫섹터: Healthcare | 관심섹터 추가: Energy, Industrials
+[Agent 4] PortfolioContext 보유 6종목 -> 과대비중: Semiconductors(47%), Technology(42%)
+[Agent 5] StockScreener   후보 9종목 선별 (제안 18 → 섹터당 3)
+[Agent 6] ChartAnalyzer   후보 9 + 보유 6 차트·선행지표 수집
+[Agent 7] ThesisValidator Bull/Bear 검증 (종목별 verdict 산출)
+[Agent 8] ReportGenerator 리포트 저장 + 텔레그램 발송 성공
+[Agent 9] FeedbackTracker 예측 15건 저장(후보 9+보유 6), 후속가격 12건 갱신
+토큰 비용: 124회 호출, 합계 $0.4485 (Haiku $0.11 + Sonnet $0.33)
+```
+
+> 과대비중 섹터(Semiconductors·Technology)는 신규 후보 없이 **보유 종목 모니터링만** 되고,
+> 발굴은 관심 섹터(Energy·Industrials) + 뉴스 핫섹터(Healthcare)에서 일어난다.
+
+### 종목별 판정 (9종목)
+
+| 섹터 | 종목 | 판정 | 확신도 |
+|------|------|------|--------|
+| Healthcare | JNJ / UNH / PFE | NEUTRAL / NEUTRAL / **BEARISH** | 52 / 52 / 72 |
+| Energy | XOM / CVX / COP | BEARISH / BEARISH / BEARISH | 62 / 62 / 62 |
+| Industrials | BA / CAT / GE | BEARISH / **BULLISH** / **BULLISH** | 65 / 62 / 62 |
+
+### 텔레그램 발송 메시지
+
+```
+[투자 리포트] 2026-06-30
+
+📊 오늘의 핫섹터: Healthcare, Energy, Industrials
+🔍 분석 종목: JNJ, UNH, PFE, XOM, CVX, COP, BA, CAT, GE
+⚠️ 시장 리스크: LOW
+
+상위 추천:
+• CAT — bullish (confidence 62)
+• GE — bullish (confidence 62)
+• PFE — bearish (confidence 72)
+
+전체 리포트: reports/report_20260630.md
+
+⚠️ 이 분석은 정보 제공 목적이며 투자 결정의 근거로 단독 사용 불가
+```
+
+### 리포트 본문 발췌 — Caterpillar (CAT), 최선호 종목
+
+```
+판정: 🟢 BULLISH | 확신도: 62% | 현재가: $1,049.55
+
+기술적 지표        RSI 63.95 | MACD Bullish | MA20·MA60 동시 상회(+9.7% / +18.8%)
+선행지표          EPS +30.52% | 내부자 0/0 | 공매도 3.01%(Δ+1.09%)
+
+💚 강세: EPS·MACD·이중 정배열 삼박자 일치, 인프라 투자 사이클 수혜
+🔴 약세: 공매도 소폭 증가, 중국 부동산 침체 아시아 매출 압박
+📋 종합: 선행·기술 지표가 가장 일관되게 긍정적. 분할 매수 또는 $980~1,000 조정 시 추가 매수 권장
+```
+
+> 전체 리포트는 종목별 기술적 지표·선행지표 표 + Bull/Bear 논거 + 종합 판단을 포함한다
+> (거시환경·핫섹터 개요 + 9종목 상세, 약 400줄).
+
+<!-- 실제 텔레그램/HTML 화면 캡처를 추가하려면 docs/screenshot.png 로 저장 후 아래 주석을 해제하세요.
+![실행 결과 스크린샷](docs/screenshot.png)
+-->
+
+---
+
 ## 주요 설정 (`.env`)
 
 | 변수 | 기본값 | 설명 |
