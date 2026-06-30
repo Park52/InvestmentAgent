@@ -1,5 +1,10 @@
 # InvestmentAgent
 
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![LLM](https://img.shields.io/badge/LLM-Claude%20(Haiku%204.5%20%7C%20Sonnet%204.6)-8A2BE2)
+![Status](https://img.shields.io/badge/status-active-success)
+
 멀티 에이전트 기반 투자 정보 수집·분석 시스템.
 다중 데이터 수집 → 섹터 분류 → 종목 선별 → 차트 분석 → 상승여력 검증 → 리포트 생성까지
 자동화된 파이프라인을 구성한다.
@@ -72,6 +77,12 @@ python scheduler.py
 아래는 실제 1회 실행(`python scheduler.py --now`) 결과다.
 관심 섹터 `Energy,Industrials` + `HOT_SECTOR_COUNT=1` + `MAX_CANDIDATES_PER_SECTOR=3` 설정.
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="폰에서 본 HTML 리포트" width="320">
+  <br>
+  <em>폰에서 본 HTML 리포트 (텔레그램으로 자동 발송됨)</em>
+</p>
+
 ### 파이프라인 로그 (요약)
 
 ```
@@ -133,10 +144,6 @@ python scheduler.py
 > 전체 리포트는 종목별 기술적 지표·선행지표 표 + Bull/Bear 논거 + 종합 판단을 포함한다
 > (거시환경·핫섹터 개요 + 9종목 상세, 약 400줄).
 
-<!-- 실제 텔레그램/HTML 화면 캡처를 추가하려면 docs/screenshot.png 로 저장 후 아래 주석을 해제하세요.
-![실행 결과 스크린샷](docs/screenshot.png)
--->
-
 ---
 
 ## 주요 설정 (`.env`)
@@ -181,3 +188,9 @@ python scheduler.py
 이 소프트웨어는 정보 제공 및 데이터 축적 목적입니다.
 산출되는 모든 분석·예측은 투자 권유나 자문이 아니며,
 투자 결정과 그 결과에 대한 책임은 전적으로 사용자에게 있습니다.
+
+---
+
+## 라이선스
+
+[MIT License](LICENSE) © 2026 Park52
